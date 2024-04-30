@@ -9,29 +9,32 @@
 
     <ImageView
         android:id="@+id/imvPhotoPreview"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imbCl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
         android:id="@+id/imbCl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/imvPhotoPreview"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        tools:layout_editor_absoluteX="177dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnAddItem"
+        app:layout_constraintEnd_toStartOf="@+id/etDesc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <Button
         android:id="@+id/btnAddItem"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Adicionar Item"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,9 +52,8 @@
         android:inputType="text"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imbCl" />
+        app:layout_constraintStart_toEndOf="@+id/imvPhotoPreview"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etDesc"
@@ -67,7 +69,6 @@
         android:text="Descrição"
         app:layout_constraintBottom_toTopOf="@+id/btnAddItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imvPhotoPreview"
         app:layout_constraintTop_toBottomOf="@+id/etTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
