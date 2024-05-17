@@ -15,30 +15,36 @@ import Pereira.Ferreira.lista.R;
 import Pereira.Ferreira.lista.activity.MainActivity;
 import Pereira.Ferreira.lista.model.MyItem;
 
-public class MyAdapter extends RecyclerView.Adapter{
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    // Referência à atividade MainActivity e à lista de itens
     MainActivity mainActivity;
     List<MyItem> itens;
 
-    public MyAdapter(MainActivity mainActivity, List<MyItem>itens) {
+
+    public MyAdapter(MainActivity mainActivity, List<MyItem> itens) {
         this.mainActivity = mainActivity;
         this.itens = itens;
     }
 
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Infla o layout do item da lista
         LayoutInflater inflater = LayoutInflater.from(mainActivity);
-        View v = inflater.inflate(R.layout.item_list,parent,false);
+        View v = inflater.inflate(R.layout.item_list, parent, false);
+        // Retorna um novo objeto ViewHolder
         return new MyViewHolder(v);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        // Obtém o item na posição especificada
         MyItem myItem = itens.get(position);
-
+        // Obtém a visualização associada ao ViewHolder
         View v = holder.itemView;
-
+        // Atualiza as visualizações com os dados do item
         ImageView imvfoto = v.findViewById(R.id.imvPhoto);
         imvfoto.setImageURI(myItem.photo);
 
@@ -47,24 +53,19 @@ public class MyAdapter extends RecyclerView.Adapter{
 
         TextView tvdesc = v.findViewById(R.id.tvDesc);
         tvdesc.setText(myItem.description);
-
-
-
-
-
     }
 
+    // Método para obter o número total de itens na lista
     @Override
     public int getItemCount() {
         return itens.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    // Classe interna para representar os itens de lista
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        // Construtor
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
         }
-
-        }
+    }
 }
-
-
