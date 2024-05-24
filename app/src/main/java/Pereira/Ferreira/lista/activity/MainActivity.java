@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Configura o RecyclerView
+        // Obtém a referência para o RecyclerView que mostra os itens
         RecyclerView rvItens = findViewById(R.id.rvItens);
 
-        // Inicializa o adaptador para a RecyclerView
+        // configura o adaptador para a RecyclerView
         myAdapter = new MyAdapter(this, itens);
         rvItens.setAdapter(myAdapter);
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvItens.setLayoutManager(layoutManager);
 
-        // Adiciona uma decoração de divisor à RecyclerView
+        // Adiciona uma decoração de divisor à RecyclerView, pode ser alterado para deixar em duas colunas
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
         rvItens.addItemDecoration(dividerItemDecoration);
 

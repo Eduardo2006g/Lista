@@ -84,10 +84,10 @@ public class NewItemActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //verifica se a solicitação foi bem sucedida
         if (requestCode == PHOTO_PICKER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 // Atualiza a URI da foto selecionada e exibe a pré-visualização da imagem
