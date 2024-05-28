@@ -2,6 +2,8 @@ package Pereira.Ferreira.lista.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,12 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import Pereira.Ferreira.lista.R;
 import Pereira.Ferreira.lista.adapter.MyAdapter;
 import Pereira.Ferreira.lista.model.MyItem;
+import Pereira.Ferreira.lista.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,7 +95,16 @@ public class MainActivity extends AppCompatActivity {
                 MyItem myItem = new MyItem();
                 myItem.title = data.getStringExtra("title");
                 myItem.description = data.getStringExtra("description");
-                myItem.photo = data.getData();
+                // Essa função carrega a imagem e a guarda dentro de um Bitmap
+                Uri selectedPhotoURI = data.getData();
+
+                try {
+                    Bitmap photo = Util.getBitmap(MainActivity.this, selectedPhotoURI, 100, 100);
+
+                    myItem.photo = photo;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
                 // Adiciona o novo item à lista e notifica o adaptador sobre a inserção
                 itens.add(myItem);

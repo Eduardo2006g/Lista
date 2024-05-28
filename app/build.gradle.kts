@@ -1,3 +1,5 @@
+val implementation: Unit
+
 plugins {
     alias(libs.plugins.androidApplication)
 }
@@ -37,4 +39,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
 }
