@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import Pereira.Ferreira.lista.R;
 import Pereira.Ferreira.lista.adapter.MyAdapter;
+import Pereira.Ferreira.lista.model.MainActivityViewModel;
 import Pereira.Ferreira.lista.model.MyItem;
 import Pereira.Ferreira.lista.util.Util;
 
@@ -57,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Obtém a referência para o RecyclerView que mostra os itens
         RecyclerView rvItens = findViewById(R.id.rvItens);
+
+        // O View Model referente a MainActivity é obtido
+        MainActivityViewModel vm = new ViewModelProvider( this  ).get(MainActivityViewModel.class);
+        //A lista de itens obtida é passada pro viewModel e passada pro adapter
+        List<MyItem> itens = vm.getItens();
 
         // configura o adaptador para a RecyclerView
         myAdapter = new MyAdapter(this, itens);
@@ -105,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+
+                // O View Model referente a MainActivity é obtido
+                MainActivityViewModel vm = new ViewModelProvider( this  ).get(MainActivityViewModel.class);
+                //A lista de itens obtida é passada pro viewModel e passada pro adapter
+                List<MyItem> itens = vm.getItens();
 
                 // Adiciona o novo item à lista e notifica o adaptador sobre a inserção
                 itens.add(myItem);

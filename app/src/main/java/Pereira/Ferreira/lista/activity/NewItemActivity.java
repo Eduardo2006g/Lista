@@ -12,10 +12,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import Pereira.Ferreira.lista.R;
+import Pereira.Ferreira.lista.model.NewItemActivityViewModel;
 
 public class NewItemActivity extends AppCompatActivity {
 
@@ -23,14 +24,23 @@ public class NewItemActivity extends AppCompatActivity {
     static int PHOTO_PICKER_REQUEST = 1;
 
     // URI da foto selecionada
-    Uri photoSelected = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Define o layout da atividade
         setContentView(R.layout.activity_new_item);
+
+        //obtem o viewModel referente a newActivity
+        NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+
+        //Obtem o endereço URI dentro do ViewModel caso não seja nulo
+        Uri selectPhotoLocation = vm.getSelectPhotoLocation();
+        if (selectPhotoLocation != null) {
+
+            //Fixa a imagem no ImagemView da tela
+            ImageView imvfotoPreview = findViewById(R.id.imvPhotoPreview);
+            imvfotoPreview.setImageURI(selectPhotoLocation);
+        }
 
         // Habilita o EdgeToEdge para estender as visualizações para as bordas da tela
         EdgeToEdge.enable(this);
@@ -51,6 +61,7 @@ public class NewItemActivity extends AppCompatActivity {
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Uri photoSelected = vm.getSelectedPhotoLocation();
                 // Verifica se uma foto foi selecionada
                 if (photoSelected == null) {
                     Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!", Toast.LENGTH_LONG).show();
@@ -85,16 +96,19 @@ public class NewItemActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //verifica se a solicitação foi bem sucedida
-        if (requestCode == PHOTO_PICKER_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                // Atualiza a URI da foto selecionada e exibe a pré-visualização da imagem
-                photoSelected = data.getData();
-                ImageView imvfotoPreview = findViewById(R.id.imvPhotoPreview);
-                imvfotoPreview.setImageURI(photoSelected);
-            }
+        // Verifica se a solicitação foi bem sucedida
+        if (requestCode == PHOTO_PICKER_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            Uri photoSelected = data.getData();
+            ImageView imvfotoPreview = findViewById(R.id.imvPhotoPreview);
+            imvfotoPreview.setImageURI(photoSelected);
+
+            //Obtem o viewModel
+            NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+            
+            //Guarda o endereço URI da imagem escolhida
+            vm.setSelectedPhotoLocation(selectedPhoto);
         }
     }
 }

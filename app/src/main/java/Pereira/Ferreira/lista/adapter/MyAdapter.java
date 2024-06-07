@@ -45,8 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // Obtém a visualização associada ao ViewHolder
         View v = holder.itemView;
         // Atualiza as visualizações com os dados do item
-        ImageView imvfoto = v.findViewById(R.id.imvPhoto);
-        imvfoto.setImageURI(myItem.photo);
+
 
         TextView tvTitle = v.findViewById(R.id.tvTitle);
         tvTitle.setText(myItem.title);
