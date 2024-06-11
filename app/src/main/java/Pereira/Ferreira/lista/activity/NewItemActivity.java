@@ -108,7 +108,7 @@ public class NewItemActivity extends AppCompatActivity {
             NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
             
             //Guarda o endereço URI da imagem escolhida
-            vm.setSelectedPhotoLocation(selectedPhoto);
+            vm.setSelectedPhotoLocation(photoSelected);
         }
     }
 }
